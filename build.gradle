@@ -5,13 +5,42 @@ plugins {
 group = 'com.skryl'
 version = '1.0-SNAPSHOT'
 
+def lombokVersion  = "1.18.34"
+def allureVersion = "2.25.0"
+def junit5Version = "5.10.0"
+def testcontainersVersion = "1.20.2"
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.10.0')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'com.microsoft.playwright:playwright:1.47.0'
+
+    implementation 'io.rest-assured:rest-assured:5.5.0'
+
+    implementation 'org.aeonbits.owner:owner:1.0.4'
+
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+    testImplementation 'ch.qos.logback:logback-classic:1.5.11'
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    implementation platform("io.qameta.allure:allure-bom:$allureVersion")
+    testImplementation "io.qameta.allure:allure-junit5"
+    implementation 'io.qameta.allure:allure-rest-assured'
+
+    testImplementation platform("org.junit:junit-bom:$junit5Version")
+    testImplementation "org.junit.jupiter:junit-jupiter"
+
+    testImplementation 'org.assertj:assertj-core:3.26.3'
+
+    implementation platform("org.testcontainers:testcontainers-bom:$testcontainersVersion")
+    testImplementation "org.testcontainers:testcontainers"
 }
 
 test {
