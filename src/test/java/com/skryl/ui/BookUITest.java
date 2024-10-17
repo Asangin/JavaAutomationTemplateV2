@@ -1,5 +1,7 @@
 package com.skryl.ui;
 
+import com.epam.reportportal.listeners.LogLevel;
+import com.epam.reportportal.service.ReportPortal;
 import com.microsoft.playwright.*;
 import com.skryl.configuration.ApplicationConfig;
 import com.skryl.ui.pages.LoginPage;
@@ -8,7 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.*;
 
+import java.io.File;
 import java.nio.file.Paths;
+import java.util.Date;
 
 @Slf4j
 public class BookUITest {
@@ -47,6 +51,8 @@ public class BookUITest {
         log.info("Trace zip file path: %s".formatted(traceZip));
         context.tracing().stop(new Tracing.StopOptions().setPath(Paths.get(traceZip)));
         context.close();
+        ReportPortal.emitLog(traceZip, LogLevel.INFO.name(), new Date(), new File(traceZip));
+        log.info("RP_MESSAGE#FILE#{}#{}", new File(traceZip).getAbsolutePath(), "I'm logging content via trace file");
     }
 
     @Test

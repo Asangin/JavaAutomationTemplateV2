@@ -9,15 +9,18 @@
     </appender>
 
     <appender name="ALLURE" class="com.skryl.logging.LogbackAllureAppender"/>
+    <appender name="REPORTPORTAL" class="com.skryl.logging.LogbackReportPortalAppender"/>
 
     <logger name="com.skryl" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="ALLURE" />
+        <appender-ref ref="REPORTPORTAL" />
     </logger>
 
     <root level="WARN">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="ALLURE" />
+        <appender-ref ref="REPORTPORTAL" />
     </root>
     <logger name="io.qameta.allure" level="OFF" />
 

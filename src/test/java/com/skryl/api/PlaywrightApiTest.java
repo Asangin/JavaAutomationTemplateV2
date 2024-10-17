@@ -5,11 +5,10 @@ import com.microsoft.playwright.APIRequestContext;
 import com.microsoft.playwright.APIResponse;
 import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.options.RequestOptions;
+import com.skryl.configuration.ApplicationConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.aeonbits.owner.ConfigFactory;
+import org.junit.jupiter.api.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +27,7 @@ public class PlaywrightApiTest {
     }
 
     void createAPIRequestContext() {
+        var config = ConfigFactory.create(ApplicationConfig.class);
         Map<String, String> headers = new HashMap<>();
         // We set this header per GitHub guidelines.
         headers.put("Accept", "application/json");
@@ -35,7 +35,7 @@ public class PlaywrightApiTest {
 
         request = playwright.request().newContext(new APIRequest.NewContextOptions()
                 // All requests we send go to this API endpoint.
-                .setBaseURL("http://localhost:8080")
+                .setBaseURL(config.uiUrl())
                 .setExtraHTTPHeaders(headers));
     }
 
@@ -66,7 +66,8 @@ public class PlaywrightApiTest {
     }
 
     @Test
-    void shouldCreateBugReport() {
+    @DisplayName("[UI] Login to Book App")
+    void loginToBookStore() {
         var data = Map.of(
                 "username", "test",
                 "password", "test"

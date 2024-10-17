@@ -1,10 +1,12 @@
 package com.skryl.ui.pages;
 
 import com.microsoft.playwright.Page;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Skryl D.V. on 2022-04-16
  */
+@Slf4j
 public class LoginPage {
     private final Page page;
 
@@ -13,6 +15,7 @@ public class LoginPage {
     }
 
     public LoginPage goToLoginPage(String url) {
+        log.info("Base url: %s".formatted(url));
         page.navigate(url + "/#/login");
         return this;
     }

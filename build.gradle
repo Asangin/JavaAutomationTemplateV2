@@ -7,7 +7,7 @@ version = '1.0-SNAPSHOT'
 
 def lombokVersion  = "1.18.34"
 def allureVersion = "2.25.0"
-def junit5Version = "5.10.0"
+def junit5Version = "5.11.2"
 def testcontainersVersion = "1.20.2"
 
 repositories {
@@ -34,8 +34,14 @@ dependencies {
     testImplementation "io.qameta.allure:allure-junit5"
     implementation 'io.qameta.allure:allure-rest-assured'
 
+    implementation 'com.epam.reportportal:agent-java-junit5:5.3.3'
+    implementation 'com.epam.reportportal:logger-java-logback:5.2.2' // WHY????
+
     testImplementation platform("org.junit:junit-bom:$junit5Version")
     testImplementation "org.junit.jupiter:junit-jupiter"
+    testImplementation "org.junit.platform:junit-platform-suite-api"
+    testImplementation "org.junit.platform:junit-platform-suite-engine"
+
 
     testImplementation 'org.assertj:assertj-core:3.26.3'
 
@@ -44,5 +50,8 @@ dependencies {
 }
 
 test {
+    testLogging.showStandardStreams = true
     useJUnitPlatform()
+    exclude '**/SmokeAPISuite.class'
+    exclude '**/SmokeUISuite.class'
 }

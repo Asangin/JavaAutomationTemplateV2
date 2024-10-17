@@ -1,10 +1,12 @@
 package com.skryl.ui.pages;
 
 import com.microsoft.playwright.Page;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Skryl D.V. on 2022-04-16
  */
+@Slf4j
 public class MainPage{
     private final Page page;
 
@@ -39,6 +41,7 @@ public class MainPage{
     }
 
     public MainPage addNewBook() {
+        log.info("Add new book");
         page.click("button:has-text(\"add\")");
         return this;
     }

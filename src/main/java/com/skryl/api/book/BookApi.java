@@ -1,6 +1,7 @@
 package com.skryl.api.book;
 
 import com.google.gson.JsonElement;
+import com.skryl.logging.ReportPortalNetworkTrafficFilter;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.config.ObjectMapperConfig;
@@ -24,7 +25,8 @@ public class BookApi {
                 .config(new RestAssuredConfig().objectMapperConfig(new ObjectMapperConfig(GSON)))
                 .filter(new RequestLoggingFilter())
                 .filter(new ResponseLoggingFilter())
-                .filter(new AllureRestAssured());
+                .filter(new AllureRestAssured())
+                .filter(new ReportPortalNetworkTrafficFilter());
     }
 
     public Response login(JsonElement body) {
