@@ -5,7 +5,7 @@ import com.skryl.model.book.LoggedInUserResponse;
 import io.restassured.http.Cookies;
 
 public class BookApiStep {
-    private BookApi bookAppApi;
+    private final BookApi bookAppApi;
     private Cookies cookies;
 
     public BookApiStep(BookApi bookAppApi) {

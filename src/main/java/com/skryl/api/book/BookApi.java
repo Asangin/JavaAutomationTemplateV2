@@ -1,7 +1,6 @@
 package com.skryl.api.book;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.config.ObjectMapperConfig;
@@ -16,7 +15,7 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.mapper.ObjectMapperType.GSON;
 
 public class BookApi {
-    private RequestSpecification requestSpec;
+    private final RequestSpecification requestSpec;
 
     public BookApi(String baseUrl) {
         requestSpec = RestAssured.given()
